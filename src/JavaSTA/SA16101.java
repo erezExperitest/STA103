@@ -15,7 +15,7 @@ public class SA16101 {
 //        return Arrays.asList(new Object[10][0]);
 //    }
 
-    private String projectBaseDirectory = "C:\\Users\\erez.akri.experitest\\workspace\\project31";
+    private String projectBaseDirectory = System.getProperty("user.dir");
     protected Client client = null;
 
 
@@ -25,14 +25,19 @@ public class SA16101 {
 
     @Test
     public void test_1(){
-        GridClient grid = new GridClient("admin", "Experitest2012", "default", "192.168.2.31", 8090, false); //(user name, password, project,ip,port,secured)
+        GridClient grid = new GridClient("admin", "Experitest2012", "default", "192.168.2.10", 80, false); //(user name, password, project,ip,port,secured)
 //        client =  grid.lockDeviceForExecution("erezTest", "contains(@name,'samsung SM-A5000')", 10,3000 ); //(test name, query, time for reserve in minuets, timeout in milliseconds)
         client =  grid.lockDeviceForExecution("erezTest", "@os='ios'", 10,3000 ); //(test name, query, time for reserve in minuets, timeout in milliseconds)
         client.setProjectBaseDirectory(projectBaseDirectory);
-        client.install("D:\\Program Files (x86)\\Experitest\\SeeTest-10.3\\bin\\ipas\\EriBank.ipa",true,false);
+        client.uninstall("com.experitest.ExperiBank");
+        client.install("/Applications/STA/SeeTest-10.3/bin/ipas/EriBank.ipa",true,false);
         client.sleep(15000);
-        client.startAudioPlay("C:\\Users\\erez.akri.experitest\\Desktop\\New folder (2)\\New folder\\Nyan_Cat.wav");
-        client.sleep(40000);
+        client.startAudioPlay("/Users/erez.akri/Desktop/Audio/DJ_Snake_Lil_Jon_-_Turn_Down_for_What_converted.wav");
+        client.sleep(5000);
+        client.startAudioRecording("/Users/erez.akri/Desktop/Audio/SA11635465.wav");
+        client.sleep(5000);
+//        client.startAudioPlay("C:\\Users\\erez.akri.experitest\\Desktop\\New folder (2)\\New folder\\Nyan_Cat.wav");
+//        client.sleep(40000);
 
     }
 
